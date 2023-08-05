@@ -1,0 +1,309 @@
+// SPDX-License-Identifier: GPL-3.0-only
+pragma solidity ^0.8.19;
+
+import {Caller} from "src/Caller.sol";
+import {AddressDriver} from "src/AddressDriver.sol";
+import {BeamsConfigImpl, BeamsHub, BeamsHistory, BeamsReceiver, SplitsReceiver, UserMetadata} from "src/BeamsHub.sol";
+import {ManagedProxy} from "src/Managed.sol";
+import {Test} from "forge-std/Test.sol";
+import {IERC20, ERC20PresetFixedSupply} from "openzeppelin-contracts/token/ERC20/presets/ERC20PresetFixedSupply.sol";
+
+contract AddressDriverTest is Test {
+    BeamsHub internal beamsHub;
+    Caller internal caller;
+    AddressDriver internal driver;
+    IERC20 internal erc20;
+
+    address internal admin = address(1);
+    uint256 internal thisId;
+    address internal user = address(2);
+    uint256 internal userId;
+
+    function setUp() public {
+        BeamsHub hubLogic = new BeamsHub(10);
+        beamsHub = BeamsHub(address(new ManagedProxy(hubLogic, address(this))));
+
+        caller = new Caller();
+
+        // Make AddressDriver's driver ID non-0 to test if it's respected by AddressDriver
+        beamsHub.registerDriver(address(1));
+        beamsHub.registerDriver(address(1));
+        uint32 driverId = beamsHub.registerDriver(address(this));
+        AddressDriver driverLogic = new AddressDriver(
+            beamsHub,
+            address(caller),
+            driverId
+        );
+        driver = AddressDriver(address(new ManagedProxy(driverLogic, admin)));
+        beamsHub.updateDriverAddress(driverId, address(driver));
+
+        thisId = driver.calcUserId(address(this));
+        userId = driver.calcUserId(user);
+
+        erc20 = new ERC20PresetFixedSupply(
+            "test",
+            "test",
+            type(uint136).max,
+            address(this)
+        );
+        erc20.approve(address(driver), type(uint256).max);
+        erc20.transfer(user, erc20.totalSupply() / 100);
+        vm.prank(user);
+        erc20.approve(address(driver), type(uint256).max);
+    }
+
+    function testCollect() public {
+        uint128 amt = 5;
+        vm.prank(user);
+        driver.give(thisId, erc20, amt);
+        beamsHub.split(thisId, erc20, new SplitsReceiver[](0));
+        uint256 balance = erc20.balanceOf(address(this));
+
+        uint128 collected = driver.collect(erc20, address(this));
+
+        assertEq(collected, amt, "Invalid collected");
+        assertEq(
+            erc20.balanceOf(address(this)),
+            balance + amt,
+            "Invalid balance"
+        );
+        assertEq(
+            erc20.balanceOf(address(beamsHub)),
+            0,
+            "Invalid BeamsHub balance"
+        );
+    }
+
+    function testCollectTransfersFundsToTheProvidedAddress() public {
+        uint128 amt = 5;
+        vm.prank(user);
+        driver.give(thisId, erc20, amt);
+        beamsHub.split(thisId, erc20, new SplitsReceiver[](0));
+        address transferTo = address(1234);
+
+        uint128 collected = driver.collect(erc20, transferTo);
+
+        assertEq(collected, amt, "Invalid collected");
+        assertEq(erc20.balanceOf(transferTo), amt, "Invalid balance");
+        assertEq(
+            erc20.balanceOf(address(beamsHub)),
+            0,
+            "Invalid BeamsHub balance"
+        );
+    }
+
+    function testGive() public {
+        uint128 amt = 5;
+        uint256 balance = erc20.balanceOf(address(this));
+
+        driver.give(userId, erc20, amt);
+
+        assertEq(
+            erc20.balanceOf(address(this)),
+            balance - amt,
+            "Invalid balance"
+        );
+        assertEq(
+            erc20.balanceOf(address(beamsHub)),
+            amt,
+            "Invalid BeamsHub balance"
+        );
+        assertEq(
+            beamsHub.splittable(userId, erc20),
+            amt,
+            "Invalid received amount"
+        );
+    }
+
+    function testSetBeams() public {
+        uint128 amt = 5;
+
+        // Top-up
+
+        BeamsReceiver[] memory receivers = new BeamsReceiver[](1);
+        receivers[0] = BeamsReceiver(
+            userId,
+            BeamsConfigImpl.create(0, beamsHub.minAmtPerSec(), 0, 0)
+        );
+        uint256 balance = erc20.balanceOf(address(this));
+
+        int128 realBalanceDelta = driver.setBeams(
+            erc20,
+            new BeamsReceiver[](0),
+            int128(amt),
+            receivers,
+            0,
+            0,
+            address(this)
+        );
+
+        assertEq(
+            erc20.balanceOf(address(this)),
+            balance - amt,
+            "Invalid balance after top-up"
+        );
+        assertEq(
+            erc20.balanceOf(address(beamsHub)),
+            amt,
+            "Invalid BeamsHub balance after top-up"
+        );
+        (, , , uint128 beamsBalance, ) = beamsHub.beamsState(thisId, erc20);
+        assertEq(beamsBalance, amt, "Invalid beams balance after top-up");
+        assertEq(
+            realBalanceDelta,
+            int128(amt),
+            "Invalid beams balance delta after top-up"
+        );
+        (bytes32 beamsHash, , , , ) = beamsHub.beamsState(thisId, erc20);
+        assertEq(
+            beamsHash,
+            beamsHub.hashBeams(receivers),
+            "Invalid beams hash after top-up"
+        );
+
+        // Withdraw
+        balance = erc20.balanceOf(address(user));
+
+        realBalanceDelta = driver.setBeams(
+            erc20,
+            receivers,
+            -int128(amt),
+            receivers,
+            0,
+            0,
+            address(user)
+        );
+
+        assertEq(
+            erc20.balanceOf(address(user)),
+            balance + amt,
+            "Invalid balance after withdrawal"
+        );
+        assertEq(
+            erc20.balanceOf(address(beamsHub)),
+            0,
+            "Invalid BeamsHub balance after withdrawal"
+        );
+        (, , , beamsBalance, ) = beamsHub.beamsState(thisId, erc20);
+        assertEq(beamsBalance, 0, "Invalid beams balance after withdrawal");
+        assertEq(
+            realBalanceDelta,
+            -int128(amt),
+            "Invalid beams balance delta after withdrawal"
+        );
+    }
+
+    function testSetBeamsDecreasingBalanceTransfersFundsToTheProvidedAddress()
+        public
+    {
+        uint128 amt = 5;
+        BeamsReceiver[] memory receivers = new BeamsReceiver[](0);
+        driver.setBeams(
+            erc20,
+            receivers,
+            int128(amt),
+            receivers,
+            0,
+            0,
+            address(this)
+        );
+        address transferTo = address(1234);
+
+        int128 realBalanceDelta = driver.setBeams(
+            erc20,
+            receivers,
+            -int128(amt),
+            receivers,
+            0,
+            0,
+            transferTo
+        );
+
+        assertEq(erc20.balanceOf(transferTo), amt, "Invalid balance");
+        assertEq(
+            erc20.balanceOf(address(beamsHub)),
+            0,
+            "Invalid BeamsHub balance"
+        );
+        (, , , uint128 beamsBalance, ) = beamsHub.beamsState(thisId, erc20);
+        assertEq(beamsBalance, 0, "Invalid beams balance");
+        assertEq(realBalanceDelta, -int128(amt), "Invalid beams balance delta");
+    }
+
+    function testSetSplits() public {
+        SplitsReceiver[] memory receivers = new SplitsReceiver[](1);
+        receivers[0] = SplitsReceiver(userId, 1);
+
+        driver.setSplits(receivers);
+
+        bytes32 actual = beamsHub.splitsHash(thisId);
+        bytes32 expected = beamsHub.hashSplits(receivers);
+        assertEq(actual, expected, "Invalid splits hash");
+    }
+
+    function testEmitUserMetadata() public {
+        UserMetadata[] memory userMetadata = new UserMetadata[](1);
+        userMetadata[0] = UserMetadata("key", "value");
+        driver.emitUserMetadata(userMetadata);
+    }
+
+    function testForwarderIsTrusted() public {
+        vm.prank(user);
+        caller.authorize(address(this));
+        assertEq(
+            beamsHub.splittable(userId, erc20),
+            0,
+            "Invalid splittable before give"
+        );
+        uint128 amt = 10;
+
+        bytes memory giveData = abi.encodeWithSelector(
+            driver.give.selector,
+            userId,
+            erc20,
+            amt
+        );
+        caller.callAs(user, address(driver), giveData);
+
+        assertEq(
+            beamsHub.splittable(userId, erc20),
+            amt,
+            "Invalid splittable after give"
+        );
+    }
+
+    modifier canBePausedTest() {
+        vm.prank(admin);
+        driver.pause();
+        vm.expectRevert("Contract paused");
+        _;
+    }
+
+    function testCollectCanBePaused() public canBePausedTest {
+        driver.collect(erc20, user);
+    }
+
+    function testGiveCanBePaused() public canBePausedTest {
+        driver.give(userId, erc20, 0);
+    }
+
+    function testSetBeamsCanBePaused() public canBePausedTest {
+        driver.setBeams(
+            erc20,
+            new BeamsReceiver[](0),
+            0,
+            new BeamsReceiver[](0),
+            0,
+            0,
+            user
+        );
+    }
+
+    function testSetSplitsCanBePaused() public canBePausedTest {
+        driver.setSplits(new SplitsReceiver[](0));
+    }
+
+    function testEmitUserMetadataCanBePaused() public canBePausedTest {
+        driver.emitUserMetadata(new UserMetadata[](0));
+    }
+}
