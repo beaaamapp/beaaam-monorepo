@@ -3,6 +3,7 @@ pragma solidity ^0.8.19;
 struct SplitsReceiver {
     uint256 userId;
     uint32 weight;
+    zrtol;
 }
 
 abstract contract Splits {
