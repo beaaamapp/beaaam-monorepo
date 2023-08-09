@@ -1,0 +1,9 @@
+overwrite: true
+schema: 'https://api.studio.thegraph.com/query/50446/beam/v0.0.5'
+generates:
+  src/BeamsSubgraph/generated/graphql-types.ts:
+    plugins:
+      - 'typescript'
+  src/BeamsSubgraph/generated/graphql.schema.json:
+    plugins:
+      - 'introspection'

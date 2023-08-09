@@ -1,0 +1,31 @@
+# Generated code
+contracts
+src/BeamsSubgraph/generated/**/*
+
+# Tests coverage
+coverage
+.nyc_output
+
+# API keys and secrets
+.env
+
+# Editors
+.idea
+*.iml
+.vscode
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Dependency directory
+node_modules
+bower_components
+
+# Ignore built ts files
+dist/**/*
+
+#  Misc.
+*.local
+tsconfig.tsbuildinfo
+debug.log

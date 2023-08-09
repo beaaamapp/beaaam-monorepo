@@ -1,0 +1,84 @@
+{
+	"name": "beaaams",
+	"version": "0.0.1-alpha.0",
+	"exports": {
+		".": {
+			"require": "./dist/index.js",
+			"import": "./dist/index.mjs"
+		},
+		"./package.json": "./package.json"
+	},
+	"types": "./dist/index.d.ts",
+	"files": [
+		"dist/"
+	],
+	"tsup": {
+		"clean": true,
+		"format": [
+			"cjs",
+			"esm"
+		],
+		"bundle": true,
+		"entry": [
+			"./src/index.ts"
+		]
+	},
+	"scripts": {
+		"lint": "prettier . --check . && eslint . --ext .ts",
+		"format": "prettier . --write .",
+		"build": "npm run generate-graphql-types && npm run build:contracts && npm run build:lib && npx typedoc --excludeInternal src/index.ts",
+		"build:lib": "tsup --dts",
+		"build:contracts": "typechain --target=ethers-v5 --out-dir contracts ./src/abi/**.json",
+		"build:lib-fast": "tsup",
+		"dev": "nodemon --watch src -e ts,json --exec 'npm run build:lib-fast'",
+		"prepare": "npm run build",
+		"pretest": "tsup",
+		"test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/*.ts' --exclude 'tests/**/*.integration.tests.ts'",
+		"test:integration": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/*.integration.tests.ts'",
+		"test:coverage": "nyc npm run test",
+		"generate-graphql-types": "graphql-codegen --config graphql.codegen.yml",
+		"commit": "npx cz"
+	},
+	"devDependencies": {
+		"@ethersproject/providers": "^5.6.8",
+		"@graphql-codegen/cli": "2.13.8",
+		"@graphql-codegen/introspection": "2.2.1",
+		"@graphql-codegen/typescript": "2.8.0",
+		"@istanbuljs/nyc-config-typescript": "^1.0.2",
+		"@typechain/ethers-v5": "^10.0.0",
+		"@types/chai": "^4.3.1",
+		"@types/mocha": "^9.1.1",
+		"@types/node": "^17.0.25",
+		"@types/sinon": "^10.0.11",
+		"@typescript-eslint/eslint-plugin": "^5.23.0",
+		"@typescript-eslint/parser": "^5.23.0",
+		"chai": "^4.3.6",
+		"cz-conventional-changelog": "^3.3.0",
+		"eslint": "^8.17.0",
+		"eslint-config-airbnb-base": "^15.0.0",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-import": "^2.26.0",
+		"eslint-plugin-prettier": "^4.0.0",
+		"ethers": "^5.7.2",
+		"graphql": "^16.6.0",
+		"mocha": "^10.0.0",
+		"nodemon": "^2.0.16",
+		"nyc": "^15.1.0",
+		"prettier": "^2.6.2",
+		"sinon": "^14.0.0",
+		"ts-node": "^10.8.0",
+		"ts-sinon": "^2.0.2",
+		"tsup": "^5.12.7",
+		"typechain": "^8.0.0",
+		"typedoc": "^0.22.17",
+		"typescript": "^4.6.4"
+	},
+	"peerDependencies": {
+		"ethers": "^5.7.2"
+	},
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
+	}
+}

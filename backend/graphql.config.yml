@@ -1,0 +1,2 @@
+schema: 'https://api.studio.thegraph.com/query/50446/beam/v0.0.5'
+documents: 'src/**/*.{gql,js,ts,jsx,tsx}'
