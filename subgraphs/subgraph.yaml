@@ -1,0 +1,146 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Contract
+    network: base-testnet
+    source:
+      address: "0x13A44B35554AbD701158c9877510Eee38870f85E"
+      abi: Contract
+      startBlock: 8031348
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AdminChanged
+        - BeaconUpgraded
+        - Upgraded
+      abis:
+        - name: Contract
+          file: ./abis/Contract.json
+      eventHandlers:
+        - event: AdminChanged(address,address)
+          handler: handleAdminChanged
+        - event: BeaconUpgraded(indexed address)
+          handler: handleBeaconUpgraded
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./src/contract.ts
+  - kind: ethereum
+    name: AddressDriver
+    network: base-testnet
+    source:
+      address: "0xeC93173931E6545b017Cda824Deca8445045f53e"
+      abi: AddressDriver
+      startBlock: 8031348
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AddressDriverAdminChanged
+        - AddressDriverBeaconUpgraded
+        - AddressDriverUpgraded
+      abis:
+        - name: AddressDriver
+          file: ./abis/AddressDriver.json
+      eventHandlers:
+        - event: AdminChanged(address,address)
+          handler: handleAdminChanged
+        - event: BeaconUpgraded(indexed address)
+          handler: handleBeaconUpgraded
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./src/address-driver.ts
+  - kind: ethereum
+    name: NFTDriver
+    network: base-testnet
+    source:
+      address: "0x5AE787F9C326E05cBe7E0f652eEDa79182928675"
+      abi: NFTDriver
+      startBlock: 8031348
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - NFTDriverAdminChanged
+        - NFTDriverBeaconUpgraded
+        - NFTDriverUpgraded
+      abis:
+        - name: NFTDriver
+          file: ./abis/NFTDriver.json
+      eventHandlers:
+        - event: AdminChanged(address,address)
+          handler: handleAdminChanged
+        - event: BeaconUpgraded(indexed address)
+          handler: handleBeaconUpgraded
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./src/nft-driver.ts
+  - kind: ethereum
+    name: ImmutableSplits
+    network: base-testnet
+    source:
+      address: "0x69aa68Bb2B1144B27327B8Eb6fBAd47E272c0FBF"
+      abi: ImmutableSplits
+      startBlock: 8031348
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ImmutableSplitsAdminChanged
+        - ImmutableSplitsBeaconUpgraded
+        - ImmutableSplitsUpgraded
+      abis:
+        - name: ImmutableSplits
+          file: ./abis/ImmutableSplits.json
+      eventHandlers:
+        - event: AdminChanged(address,address)
+          handler: handleAdminChanged
+        - event: BeaconUpgraded(indexed address)
+          handler: handleBeaconUpgraded
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./src/immutable-splits.ts
+  - kind: ethereum
+    name: Caller
+    network: base-testnet
+    source:
+      address: "0x091fb6A649ee93812458cFD269e7Bf6DE995039b"
+      abi: Caller
+      startBlock: 8031348
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Authorized
+        - CalledAs
+        - CalledSigned
+        - EIP712DomainChanged
+        - NonceSet
+        - Unauthorized
+        - UnauthorizedAll
+      abis:
+        - name: Caller
+          file: ./abis/Caller.json
+      eventHandlers:
+        - event: Authorized(indexed address,indexed address)
+          handler: handleAuthorized
+        - event: CalledAs(indexed address,indexed address)
+          handler: handleCalledAs
+        - event: CalledSigned(indexed address,uint256)
+          handler: handleCalledSigned
+        - event: EIP712DomainChanged()
+          handler: handleEIP712DomainChanged
+        - event: NonceSet(indexed address,uint256)
+          handler: handleNonceSet
+        - event: Unauthorized(indexed address,indexed address)
+          handler: handleUnauthorized
+        - event: UnauthorizedAll(indexed address)
+          handler: handleUnauthorizedAll
+      file: ./src/caller.ts

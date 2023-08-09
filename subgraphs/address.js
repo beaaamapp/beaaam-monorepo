@@ -1,0 +1,1 @@
+export  const address = 'https://thegraph.com/studio/subgraph/beam'

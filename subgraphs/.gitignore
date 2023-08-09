@@ -1,0 +1,9 @@
+
+
+# Dotenv file
+.env
+
+
+node_modules 
+generated
+build
