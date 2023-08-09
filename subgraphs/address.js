@@ -1,1 +1,1 @@
-export  const address = 'https://thegraph.com/studio/subgraph/beam'
+export  const address = 'https://api.studio.thegraph.com/query/50446/beam/v0.0.5'

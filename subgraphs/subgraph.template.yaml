@@ -1,34 +1,34 @@
-specVersion: 0.0.5
+specVersion: 0.0.2
 schema:
   file: ./schema.graphql
 dataSources:
-  - kind: ethereum
-    name: Contract
-    network: base-testnet
+  - kind: ethereum/contract
+    name: DripsHub
+    network: {{ network }}
     source:
-      address: "0x13A44B35554AbD701158c9877510Eee38870f85E"
-      abi: BeamsHub
-      startBlock: 8031348
+      address: '{{dripsHub.address}}'
+      abi: DripsHub
+      startBlock: {{ dripsHub.block }}
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.7
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
-        - BeamsHub
+        - DripsHub
       abis:
-        - name: BeamsHub
-          file: ./abis/BeamsHub.json
+        - name: DripsHub
+          file: ./abis/DripsHub.json
       eventHandlers:
         - event: UserMetadataEmitted(indexed uint256,indexed bytes32,bytes)
           handler: handleUserMetadata
         - event: Collected(indexed uint256,indexed uint256,uint128)
           handler: handleCollected
-        - event: BeamsSet(indexed uint256,indexed uint256,indexed bytes32,bytes32,uint128,uint32)
-          handler: handleBeamsSet
-        - event: BeamsReceiverSeen(indexed bytes32,indexed uint256,uint256)
-          handler: handleBeamsReceiverSeen
-        - event: SqueezedBeams(indexed uint256,indexed uint256,indexed uint256,uint128,bytes32[])
-          handler: handleSqueezedBeams
+        - event: DripsSet(indexed uint256,indexed uint256,indexed bytes32,bytes32,uint128,uint32)
+          handler: handleDripsSet
+        - event: DripsReceiverSeen(indexed bytes32,indexed uint256,uint256)
+          handler: handleDripsReceiverSeen
+        - event: SqueezedDrips(indexed uint256,indexed uint256,indexed uint256,uint128,bytes32[])
+          handler: handleSqueezedDrips
         - event: SplitsSet(indexed uint256,indexed bytes32)
           handler: handleSplitsSet
         - event: SplitsReceiverSeen(indexed bytes32,indexed uint256,uint32)
@@ -41,20 +41,19 @@ dataSources:
           handler: handleAppAddressUpdated
         - event: Split(indexed uint256,indexed uint256,indexed uint256,uint128)
           handler: handleSplit
-        - event: ReceivedBeams(indexed uint256,indexed uint256,uint128,uint32)
-          handler: handleReceivedBeams
+        - event: ReceivedDrips(indexed uint256,indexed uint256,uint128,uint32)
+          handler: handleReceivedDrips
       file: ./src/mapping.ts
-  
-  - kind: ethereum
+  - kind: ethereum/contract
     name: NFTDriver
-    network: base-testnet
+    network: {{ network }}
     source:
-      address: "0x5AE787F9C326E05cBe7E0f652eEDa79182928675"
+      address: '{{nftDriver.address}}'
       abi: NFTDriver
-      startBlock: 8031348
+      startBlock: {{ nftDriver.block }}
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.7
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - NFTDriver
@@ -65,16 +64,16 @@ dataSources:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleNFTSubAccountTransfer
       file: ./src/mapping.ts
-  - kind: ethereum
+  - kind: ethereum/contract
     name: ImmutableSplitsDriver
-    network: base-testnet
+    network: {{ network }}
     source:
-      address: "0x69aa68Bb2B1144B27327B8Eb6fBAd47E272c0FBF"
+      address: '{{immutableSplitsDriver.address}}'
       abi: ImmutableSplitsDriver
-      startBlock: 8031348
+      startBlock: {{ immutableSplitsDriver.block }}
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.7
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - ImmutableSplitsDriver
@@ -85,4 +84,3 @@ dataSources:
         - event: CreatedSplits(indexed uint256,indexed bytes32)
           handler: handleImmutableSplitsCreated
       file: ./src/mapping.ts
- 

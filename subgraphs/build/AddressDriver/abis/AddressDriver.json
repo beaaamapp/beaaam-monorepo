@@ -6,7 +6,11 @@
         "name": "logic",
         "type": "address"
       },
-      { "internalType": "address", "name": "admin", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "admin",
+        "type": "address"
+      }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
@@ -56,6 +60,12 @@
     "name": "Upgraded",
     "type": "event"
   },
-  { "stateMutability": "payable", "type": "fallback" },
-  { "stateMutability": "payable", "type": "receive" }
+  {
+    "stateMutability": "payable",
+    "type": "fallback"
+  },
+  {
+    "stateMutability": "payable",
+    "type": "receive"
+  }
 ]

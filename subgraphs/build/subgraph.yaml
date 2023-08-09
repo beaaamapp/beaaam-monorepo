@@ -1,6 +1,6 @@
 specVersion: 0.0.5
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum
     name: Contract
@@ -17,7 +17,7 @@ dataSources:
         - BeamsHub
       abis:
         - name: BeamsHub
-          file: ./abis/BeamsHub.json
+          file: Contract\abis\BeamsHub.json
       eventHandlers:
         - event: UserMetadataEmitted(indexed uint256,indexed bytes32,bytes)
           handler: handleUserMetadata
@@ -43,8 +43,7 @@ dataSources:
           handler: handleSplit
         - event: ReceivedBeams(indexed uint256,indexed uint256,uint128,uint32)
           handler: handleReceivedBeams
-      file: ./src/mapping.ts
-  
+      file: Contract\Contract.wasm
   - kind: ethereum
     name: NFTDriver
     network: base-testnet
@@ -60,11 +59,11 @@ dataSources:
         - NFTDriver
       abis:
         - name: NFTDriver
-          file: ./abis/NFTDriver.json
+          file: NFTDriver\abis\NFTDriver.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleNFTSubAccountTransfer
-      file: ./src/mapping.ts
+      file: Contract\Contract.wasm
   - kind: ethereum
     name: ImmutableSplitsDriver
     network: base-testnet
@@ -80,9 +79,8 @@ dataSources:
         - ImmutableSplitsDriver
       abis:
         - name: ImmutableSplitsDriver
-          file: ./abis/ImmutableSplitsDriver.json
+          file: ImmutableSplitsDriver\abis\ImmutableSplitsDriver.json
       eventHandlers:
         - event: CreatedSplits(indexed uint256,indexed bytes32)
           handler: handleImmutableSplitsCreated
-      file: ./src/mapping.ts
- 
+      file: Contract\Contract.wasm

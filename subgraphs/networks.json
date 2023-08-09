@@ -1,20 +1,14 @@
 {
   "base-testnet": {
-    "Contract": {
+    "beamsHub": {
       "address": "0x13A44B35554AbD701158c9877510Eee38870f85E",
       "startBlock": 8031348
     },
-    "AddressDriver": {
-      "address": "0xeC93173931E6545b017Cda824Deca8445045f53e"
-    },
-    "NFTDriver": {
+    "nftDriver": {
       "address": "0x5AE787F9C326E05cBe7E0f652eEDa79182928675"
     },
-    "ImmutableSplits": {
+    "immutableSplitsDriver": {
       "address": "0x69aa68Bb2B1144B27327B8Eb6fBAd47E272c0FBF"
-    },
-    "Caller": {
-      "address": "0x091fb6A649ee93812458cFD269e7Bf6DE995039b"
     }
   }
 }
