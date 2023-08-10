@@ -4,6 +4,8 @@ import Web3Modal from 'web3modal';
 import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
 import { AddressDriverClient, Utils } from 'beaaams-backend';
+
+// https://github.com/vitejs/vite/issues/7257#issuecomment-1079579892
 import WalletConnectProvider from '@walletconnect/web3-provider/dist/umd/index.min.js';
 import testnetMockProvider from './__test__/local-testnet-mock-provider';
 import isTest from '$lib/utils/is-test';
