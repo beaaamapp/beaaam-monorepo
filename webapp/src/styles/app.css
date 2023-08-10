@@ -1,0 +1,52 @@
+body {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* hide input[number] arrows */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.search-highlight {
+  background-color: var(--color-foreground-level-2);
+  display: inline;
+  border-radius: 0.25rem;
+}
+
+.only-dark-theme,
+.only-light-theme,
+.only-h4x0r-theme {
+  display: none;
+}
+
+.main[data-theme='light'] .only-light-theme {
+  display: initial;
+}
+
+.main[data-theme='dark'] .only-dark-theme {
+  display: initial;
+}
+
+.main[data-theme='h4x0r'] .only-h4x0r-theme {
+  display: initial;
+}
+
+@font-face {
+  font-family: 'inter';
+  font-weight: 400;
+  font-style: normal;
+  src: url('/fonts/Inter-Bold.otf') format('otf');
+}
+
+h1,
+.typo-header-1,
+.pixelated {
+  font-family: 'inter', Times, serif;
+  font-weight: normal;
+  font-style: normal;
+}

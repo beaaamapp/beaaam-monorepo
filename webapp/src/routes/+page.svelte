@@ -1,10 +1,8 @@
 <script>
-    
-  
+    // @ts-ignore
+    import LpHeader from './components/lp-header.svelte';
     import { onMount } from 'svelte';
     import Beaaam from '$lib/images/beaaam.jpg';
-
-  
     onMount(() => {
 
     });
@@ -18,7 +16,7 @@
     />
   </svelte:head>
   
-  
+  <LpHeader />
   <div id="lp">
     <div id="wrapper">
       <section id="hero">
