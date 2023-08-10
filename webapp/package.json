@@ -4,13 +4,19 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
+		"dev:local-env:start-app": "PUBLIC_TEST_MODE=true vite dev",
+		"dev:local-env:start-env": "docker compose up",
+		"dev:local-env:stop-env": "docker compose down",
 		"build": "vite build",
 		"preview": "vite preview",
+		"test:e2e": "PUBLIC_TEST_MODE=true vitest run e2e",
+		"test:unit": "vitest run unit",
+		"e2e": "npm run build && npm run test:e2e",
+		"coverage": "vitest run --coverage",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
-		"prepare": "husky install",
 		"postinstall": "./scripts/install-twemoji-assets.sh && ./scripts/install-design-system-static-assets.sh"
 	},
 	"devDependencies": {
@@ -63,8 +69,8 @@
 		"@walletconnect/web3-provider": "^1.8.0",
 		"ethers": "^5.7.0",
 		"fuzzysort": "^2.0.3",
-		"web3modal": "^1.9.9",
 		"radicle-design-system": "github:radicle-dev/radicle-design-system#brandon+jason/drips-restyle",
+		"web3modal": "^1.9.9",
 		"zod": "^3.19.1"
 	},
 	"type": "module"

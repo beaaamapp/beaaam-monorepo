@@ -17,7 +17,7 @@
   import GlobalAdvisory from '$lib/components/global-advisory/global-advisory.svelte';
   import Spinner from '$lib/components/spinner/spinner.svelte';
   import { fly } from 'svelte/transition';
-  import { isSafe } from '$lib/stores/wallet/safe/is-safe';
+
 
   export let data: { pathname: string };
 
@@ -49,7 +49,7 @@
       if the user is using the WalletConnect Safe App to connect to Beams, instead of using Beams as a Safe App
       directly. If this is the case, the function triggers a warning modal.
       */
-      if (!safe) warnIfSafe(network.chainId, address);
+      
 
       try {
         await streams.connect((await addressDriverClient.getUserIdByAddress(address)).toString());
@@ -74,34 +74,7 @@
     initializing = false;
   }
 
-  async function warnIfSafe(chainId: number, address: string) {
-    const isASafe = await isSafe(chainId, address);
-
-    if (isASafe) {
-      globalAdvisoryStore.add((resolve) => ({
-        headline: 'Using a Safe?',
-        description:
-          'Instead of connecting to the Safe with WalletConnect, we recommend running Beams as a Safe App directly.',
-        emoji: '⚠️',
-        button: {
-          label: 'Disconnect',
-          handler: () => {
-            wallet.disconnect();
-            resolve();
-          },
-        },
-        secondaryButton: {
-          label: 'Proceed anyway',
-          handler: resolve,
-        },
-        learnMoreLink: {
-          label: 'Learn more',
-          url: '',
-        },
-        fatal: false,
-      }));
-    }
-  }
+  
 
   onMount(async () => {
     await initializeStores();

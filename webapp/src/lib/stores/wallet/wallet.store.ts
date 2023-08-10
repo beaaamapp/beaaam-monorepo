@@ -20,8 +20,8 @@ const appsSdk = new SafeAppsSDK();
 
 const { SUPPORTED_CHAINS } = Utils.Network;
 const DEFAULT_NETWORK: Network = {
-  chainId: 84531,
-  name: 'base-goerli',
+  chainId: 420,
+  name: 'optimism-goerli',
 };
 
 const INFURA_ID = 'aadcb5b20a6e4cc09edfdd664ed6334c';
@@ -155,9 +155,11 @@ const walletStore = () => {
         emoji: '🔌',
       });
 
+      // { chainId: `0x${DEFAULT_NETWORK.chainId.toString(16)}` },
       await provider.send('wallet_switchEthereumChain', [
-        { chainId: `0x${DEFAULT_NETWORK.chainId.toString(16)}` },
+        { chainId: `0x14a33` },
       ]);
+      
 
       clearAdvisory();
     }
