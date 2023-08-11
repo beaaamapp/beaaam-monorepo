@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Balances from './sections/balances.section.svelte';
   import wallet from '$lib/stores/wallet/wallet.store';
   import guardConnected from '$lib/utils/guard-connected';
 
@@ -20,6 +21,7 @@
   <h1>Dashboard</h1>
   
   <div class="sections">
+    <Balances {userId} disableActions={false} />
    
     
   </div>
