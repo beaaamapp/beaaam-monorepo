@@ -7,9 +7,9 @@
 
 <script lang="ts">
   import { createSvelteTable, flexRender, type TableOptions } from '@tanstack/svelte-table';
-  import ChevronDown from 'radicle-design-system/icons/ChevronDown.svelte';
-  import ChevronUp from 'radicle-design-system/icons/ChevronUp.svelte';
-  import InfoCircle from 'radicle-design-system/icons/InfoCircle.svelte';
+  import ChevronDown from '$lib/static/icons/ChevronDown.svelte';
+  import ChevronUp from '$lib/static/icons/ChevronUp.svelte';
+  import InfoCircle from '$lib/static/icons/InfoCircle.svelte';
   import { createEventDispatcher } from 'svelte';
   import Tooltip from '../tooltip/tooltip.svelte';
 //
