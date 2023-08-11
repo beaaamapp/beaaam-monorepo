@@ -13,7 +13,7 @@
   import { createEventDispatcher, onMount } from 'svelte';
   import type { StepComponentEvents } from '$lib/components/stepper/types';
   import wallet from '$lib/stores/wallet/wallet.store';
-  import StreamVisual from '$lib/components/stream-visual/stream-visual.svelte';
+  // import StreamVisual from '$lib/components/stream-visual/stream-visual.svelte';
   import ListSelect from '$lib/components/list-select/list-select.svelte';
   import Token from '$lib/components/token/token.svelte';
   import type { Items } from '$lib/components/list-select/list-select.types';
@@ -198,12 +198,12 @@
 </script>
 
 <StepLayout>
-  <StreamVisual
+  <!-- <StreamVisual
     disableLinks
     fromAddress={$wallet.address}
     toAddress={recipientAddressValidationState.type === 'valid' ? recipientAddressValue : undefined}
     amountPerSecond={amountValidationState?.type === 'valid' ? amountPerSecond : undefined}
-  />
+  /> -->
   <StepHeader
     headline="Create stream"
     description="Stream any ERC-20 token to anyone with an Ethereum address."

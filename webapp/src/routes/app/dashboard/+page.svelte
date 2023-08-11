@@ -1,5 +1,6 @@
 <script lang="ts">
   import Balances from './sections/balances.section.svelte';
+  import Streams from './sections/streams.section.svelte';
   import wallet from '$lib/stores/wallet/wallet.store';
   import guardConnected from '$lib/utils/guard-connected';
 
@@ -22,6 +23,7 @@
   
   <div class="sections">
     <Balances {userId} disableActions={false} />
+    <Streams {userId} disableActions={false} />
    
     
   </div>

@@ -90,7 +90,7 @@ function setStepCopyWaitingForConfirmation(
       message: 'Waiting for your transaction to be confirmed on the network.',
       link: {
         url: etherscanLink(networkName, txHash),
-        label: 'View on Etherscan',
+        label: 'View on Blockscan',
       },
     },
   );

@@ -9,8 +9,8 @@
   --color-positive-level-6: #569656;
   --color-caution: #ffc555;
   --color-caution-level-1: #fff6e5;
-  --color-caution-level-2: #ffe5b2;
-  --color-caution-level-6: #b27805;
+  --color-caution-level-2: #0052ff;
+  --color-caution-level-6: #ffffff;
   --color-negative: #ff5555;
   --color-negative-level-1: #ffeded;
   --color-negative-level-2: #ff8787;
@@ -81,9 +81,9 @@
 
 [data-primary-color='blue'] {
   --color-primary: rgb(241, 48, 48);
-  --color-primary-level-1: rgba(85, 85, 255, 0.17);
+  --color-primary-level-1: rgba(247, 31, 31, 0.925);
   --color-primary-level-2: rgba(85, 85, 255, 0.37);
-  --color-primary-level-6: rgba(85, 85, 255, 0.87);
+  --color-primary-level-6: rgba(255, 255, 255, 0.87);
 }
 
 [data-primary-color='blue'][data-theme='dark'] {
