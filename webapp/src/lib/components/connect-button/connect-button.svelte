@@ -12,10 +12,14 @@
 {#if $wallet.connected}
   <Flyout>
     <div class="trigger" slot="trigger">
-      {#if $wallet.network.chainId !== 1}
+      {#if $wallet.network.chainId == 1}
         <div class="network-badge">
           <p>{$wallet.network.name}</p>
         </div>
+        {:else if $wallet.network.chainId == 84531 }
+          <div class="network-badge">
+            <p>Base Goerli</p>
+          </div>
       {/if}
       {#if safeAppMode}<div class="safe-logo">
           <!-- <SafeLogo /> -->
