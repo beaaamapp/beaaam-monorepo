@@ -7,5 +7,5 @@
 export default function (networkName: string, txHash: string) {
   if (networkName === 'homestead') return `https://etherscan.io/tx/${txHash}`;
   
-  return `https://goerli.basescan.org/${txHash}`;
+  return `https://goerli.basescan.org/tx/${txHash}`;
 }
