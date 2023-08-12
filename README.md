@@ -12,7 +12,7 @@
 <h4 align="center">The Cutting-Edge Protocol for Seamless Token Beaaaming aka Streaming 😉</h4>
 
 <p align="center">
-  <a href="#Introduction">Introduction</a> •
+  <a href="#introduction">Introduction</a> •
   <a href="#key-features">Key Features</a> •
   <a href="#usage">Usage</a> •
   <a href="#local-deployment">Local deployment</a> •
@@ -26,7 +26,7 @@
 
 ## Introduction 
 
- Beam protocol embodies full decentralization, non-custodial autonomy, and gas optimization. It empowers you to schedule and structure ERC-20 token transactions to specific addresses. Please note that the provided information is solely for educational purposes.
+ Beam protocol embodies full decentralization, non-custodial autonomy, and gas optimization. It empowers you to schedule and structure ERC-20 token transactions to specific addresses.
 
 Beaaaming entails gradual fund transfer over time. Initializing beaaaming involves configuring a list of receivers and funding your streamable balance. Once configured, fund flow commences automatically until the balance depletes. Balance adjustments, such as topping up or withdrawing unstreamed funds, are feasible anytime. The balance updates every second and cannot retrieve already-streamed funds. Receiver lists can be modified at any time, affecting future beaaaming behavior. Each user has distinct configurations and balances for separate ERC-20 tokens.
 
@@ -44,7 +44,7 @@ Key Features of Beam :
 
 3. **Scheduled beaaams:** Users and developers can schedule streams to start and end at specific future times, enhancing precision in fund beaaaming management.
 
-4. **Shared Stream Balances:** Unlike other protocols, Beams allows users to fund and top-up multiple streams using a single balance and transaction, reducing the number of transactions and associated gas costs.
+4. **Shared Beaamings Balances:** Unlike other protocols, Beams allows users to fund and top-up multiple beaaamings using a single balance and transaction, reducing the number of transactions and associated gas costs.
 
 5. **Flexible Identity Model:** Beam introduces a more versatile user identity and account model, accommodating various methods of account creation, including NFTs or Git repositories.
 
@@ -148,6 +148,8 @@ When utilizing the Beams JavaScript SDK, developers are shielded from the intric
 You'll notice that this method signature contains no mention of any account IDs - it's all just ordinary Ethereum addresses (here transferToAddress is the Ethereum address that the user wishes to collect their funds to).
 
 ## smart contracts deployments 
+
+
 
 
 
