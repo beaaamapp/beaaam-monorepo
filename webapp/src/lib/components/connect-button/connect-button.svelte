@@ -20,6 +20,18 @@
           <div class="network-badge">
             <p>Base Goerli</p>
           </div>
+          {:else if $wallet.network.chainId == 420 }
+          <div class="network-badge">
+            <p>Optimisim Goerli</p>
+          </div>
+          {:else if $wallet.network.chainId == 919 }
+          <div class="network-badge">
+            <p>Mode Sepolia</p>
+          </div>
+          {:else if $wallet.network.chainId == 999 }
+          <div class="network-badge">
+            <p>Zora Goerli</p>
+          </div>
       {/if}
       {#if safeAppMode}<div class="safe-logo">
           <!-- <SafeLogo /> -->
