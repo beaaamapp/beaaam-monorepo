@@ -3,11 +3,11 @@
   import { utils } from 'ethers';
   import IdentityBadge from '$lib/components/identity-badge/identity-badge.svelte';
 
-  export let context: CellContext<unknown, unknown>;
+  // export let context: CellContext<unknown, unknown>;
 
   let address: string;
   $: {
-    const value = context.getValue();
+    const value = '0x0000000000000000000000000000000000000000';
 
     if (!(typeof value === 'string' && utils.isAddress(value))) {
       throw new Error('Identity Badge Cell received a non-address value');

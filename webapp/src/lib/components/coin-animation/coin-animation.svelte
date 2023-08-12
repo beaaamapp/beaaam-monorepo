@@ -10,7 +10,7 @@
   export let playSound = false;
   export let animateOnHover = true;
 
-  const coinSound = browser ? new Audio('/assets/coin-sound.mp3') : undefined;
+  const coinSound = browser ? new Audio('') : undefined;
   if (coinSound) coinSound.volume = 0.1;
 
   onMount(() => enable && animateOnMount && animate(false));

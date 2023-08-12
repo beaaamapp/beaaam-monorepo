@@ -7,12 +7,12 @@
   import Token from '$lib/components/token/token.svelte';
   import { z } from 'zod';
 
-  export let context: CellContext<unknown, unknown>;
+  // export let context: CellContext<unknown, unknown>;
 
   let props: Token['$$prop_def'];
 
   $: {
-    const value = "context.getValue()";
+    // const value = "context.getValue()";
 
     const propSchema = z.object({
       address: z.string(),
@@ -27,7 +27,10 @@
         .optional(),
     });
 
-    // props = propSchema.parse(value);
+    props = propSchema.parse(({
+      address: 'SuperHack',
+     
+    }));
   }
 </script>
 

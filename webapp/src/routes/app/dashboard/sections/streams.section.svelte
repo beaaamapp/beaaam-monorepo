@@ -147,97 +147,97 @@
 
   onMount(updateTable);
 
-  // const outgoingTableColumns: ColumnDef<OutgoingStreamTableRow>[] = [
-  //   {
-  //     accessorKey: 'name',
-  //     header: 'Name',
-  //     cell: () => NameAndBadgeCell,
-  //     enableSorting: false,
-  //     size: (100 / 24) * 8,
-  //   },
-  //   {
-  //     accessorKey: 'toAddress',
-  //     header: 'To',
-  //     cell: () => IdentityBadgeCell,
-  //     enableSorting: false,
-  //     size: (100 / 24) * 5,
-  //   },
-  //   {
-  //     accessorKey: 'amount',
-  //     header: 'Total streamed',
-  //     cell: () => AmountCell,
-  //     enableSorting: false,
-  //     size: (100 / 24) * 5,
-  //   },
-  //   {
-  //     accessorKey: 'token',
-  //     header: 'Token',
-  //     cell: () => TokenCell,
-  //     enableSorting: false,
-  //     size: (100 / 24) * 2,
-  //   },
-  //   {
-  //     accessorKey: 'chevron',
-  //     header: '',
-  //     cell: () => ChevronRightCell,
-  //     enableSorting: false,
-  //     size: (100 / 24) * 2,
-  //   },
-  // ];
+  const outgoingTableColumns: ColumnDef<OutgoingStreamTableRow>[] = [
+    {
+      accessorKey: 'name',
+      header: 'Name',
+      cell: () => NameAndBadgeCell,
+      enableSorting: false,
+      size: (100 / 24) * 8,
+    },
+    {
+      accessorKey: 'toAddress',
+      header: 'To',
+      cell: () => IdentityBadgeCell,
+      enableSorting: false,
+      size: (100 / 24) * 5,
+    },
+    {
+      accessorKey: 'amount',
+      header: 'Total streamed',
+      cell: () => AmountCell,
+      enableSorting: false,
+      size: (100 / 24) * 5,
+    },
+    {
+      accessorKey: 'token',
+      header: 'Token',
+      cell: () => TokenCell,
+      enableSorting: false,
+      size: (100 / 24) * 2,
+    },
+    {
+      accessorKey: 'chevron',
+      header: '',
+      cell: () => ChevronRightCell,
+      enableSorting: false,
+      size: (100 / 24) * 2,
+    },
+  ];
 
-  // const incomingTableColumns: ColumnDef<OutgoingStreamTableRow>[] = [
-  //   {
-  //     accessorKey: 'name',
-  //     header: 'Name',
-  //     cell: () => NameAndBadgeCell,
-  //     enableSorting: false,
-  //     size: (100 / 24) * 8,
-  //   },
-  //   {
-  //     accessorKey: 'fromAddress',
-  //     header: 'From',
-  //     cell: () => IdentityBadgeCell,
-  //     enableSorting: false,
-  //     size: (100 / 24) * 5,
-  //   },
-  //   {
-  //     accessorKey: 'amount',
-  //     header: 'Received',
-  //     cell: () => AmountCell,
-  //     enableSorting: false,
-  //     size: (100 / 24) * 5,
-  //   },
-  //   {
-  //     accessorKey: 'token',
-  //     header: 'Token',
-  //     cell: () => TokenCell,
-  //     enableSorting: false,
-  //     size: (100 / 24) * 2,
-  //   },
-  //   {
-  //     accessorKey: 'chevron',
-  //     header: '',
-  //     cell: () => ChevronRightCell,
-  //     enableSorting: false,
-  //     size: (100 / 24) * 2,
-  //   },
-  // ];
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // let optionsOutgoing: TableOptions<any>;
-  // $: optionsOutgoing = {
-  //   data: outgoingTableData,
-  //   columns: outgoingTableColumns,
-  //   getCoreRowModel: getCoreRowModel(),
-  // };
+  const incomingTableColumns: ColumnDef<OutgoingStreamTableRow>[] = [
+    {
+      accessorKey: 'name',
+      header: 'Name',
+      cell: () => NameAndBadgeCell,
+      enableSorting: false,
+      size: (100 / 24) * 8,
+    },
+    {
+      accessorKey: 'fromAddress',
+      header: 'From',
+      cell: () => IdentityBadgeCell,
+      enableSorting: false,
+      size: (100 / 24) * 5,
+    },
+    {
+      accessorKey: 'amount',
+      header: 'Received',
+      cell: () => AmountCell,
+      enableSorting: false,
+      size: (100 / 24) * 5,
+    },
+    {
+      accessorKey: 'token',
+      header: 'Token',
+      cell: () => TokenCell,
+      enableSorting: false,
+      size: (100 / 24) * 2,
+    },
+    {
+      accessorKey: 'chevron',
+      header: '',
+      cell: () => ChevronRightCell,
+      enableSorting: false,
+      size: (100 / 24) * 2,
+    },
+  ];
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // let optionsIncoming: TableOptions<any>;
-  // $: optionsIncoming = {
-  //   data: incomingTableData,
-  //   columns: incomingTableColumns,
-  //   getCoreRowModel: getCoreRowModel(),
-  // };
+  let optionsOutgoing: TableOptions<any>;
+  $: optionsOutgoing = {
+    data: outgoingTableData,
+    columns: outgoingTableColumns,
+    getCoreRowModel: getCoreRowModel(),
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let optionsIncoming: TableOptions<any>;
+  $: optionsIncoming = {
+    data: incomingTableData,
+    columns: incomingTableColumns,
+    getCoreRowModel: getCoreRowModel(),
+  };
 
   // As soon as the given account has been fetched at least once, display content.
   let loaded = false;
@@ -287,7 +287,7 @@
       {error}
       {empty}
     >
-      <!-- {#if optionsOutgoing.data.length > 0}
+      {#if optionsOutgoing.data.length > 0}
         <div class="table-container">
           <h4 class="table-group-header">↑ Outgoing</h4>
           <Table
@@ -308,7 +308,7 @@
             on:rowClick={(e) => onRowClick(incomingTableData, e)}
           />
         </div>
-      {/if} -->
+      {/if}
     </SectionSkeleton>
   </div>
 </div>

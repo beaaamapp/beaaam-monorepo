@@ -1,5 +1,5 @@
 <script lang="ts">
-  import TokensIcon from 'radicle-design-system/icons/Plus.svelte';
+  import TokensIcon from '$lib/static/icons/Plus.svelte';
   import SectionHeader from '$lib/components/section-header/section-header.svelte';
   import Table, { type RowClickEventPayload } from '$lib/components/table/table.svelte';
   import TokenCell, { type TokenCellData } from '$lib/components/table/cells/token.cell.svelte';
@@ -99,63 +99,63 @@
     if (userId) updateTable();
   }
 
-  // function buildTableColumns(isClickable = false): ColumnDef<TokenTableRow>[] {
-  //   return [
-  //     {
-  //       accessorKey: 'token',
-  //       header: 'Token',
-  //       cell: () => TokenCell,
-  //       enableSorting: false,
-  //       size: (100 / 24) * 8,
-  //     },
-  //     {
-  //       accessorKey: 'earnings',
-  //       header: 'Incoming',
-  //       cell: () => Amount,
-  //       enableSorting: false,
-  //       size: (100 / 24) * 5,
-  //       meta: {
-  //         tooltipMessage:
-  //           "Your incoming balance is a real-time estimate of what you've earned up until this moment, minus any prior withdrawals.",
-  //       },
-  //     },
-  //     {
-  //       accessorKey: 'streaming',
-  //       header: 'Outgoing',
-  //       cell: () => Amount,
-  //       enableSorting: false,
-  //       size: (100 / 24) * 5,
-  //       meta: {
-  //         tooltipMessage:
-  //           'Your outgoing balance is the remaining balance you can stream to others for this token.',
-  //       },
-  //     },
-  //     {
-  //       accessorKey: 'netRate',
-  //       header: 'Net rate',
-  //       cell: () => Amount,
-  //       enableSorting: false,
-  //       size: (100 / 24) * 2,
-  //     },
-  //     {
-  //       accessorKey: 'chevron',
-  //       header: '',
-  //       cell: isClickable ? () => ChevronRightCell : undefined,
-  //       enableSorting: false,
-  //       size: (100 / 24) * 2,
-  //     },
-  //   ];
-  // }
+  function buildTableColumns(isClickable = false): ColumnDef<TokenTableRow>[] {
+    return [
+      {
+        accessorKey: 'token',
+        header: 'Token',
+        cell: () => TokenCell,
+        enableSorting: false,
+        size: (100 / 24) * 8,
+      },
+      {
+        accessorKey: 'earnings',
+        header: 'Incoming',
+        cell: () => Amount,
+        enableSorting: false,
+        size: (100 / 24) * 5,
+        meta: {
+          tooltipMessage:
+            "Your incoming balance is a real-time estimate of what you've earned up until this moment, minus any prior withdrawals.",
+        },
+      },
+      {
+        accessorKey: 'streaming',
+        header: 'Outgoing',
+        cell: () => Amount,
+        enableSorting: false,
+        size: (100 / 24) * 5,
+        meta: {
+          tooltipMessage:
+            'Your outgoing balance is the remaining balance you can stream to others for this token.',
+        },
+      },
+      {
+        accessorKey: 'netRate',
+        header: 'Net rate',
+        cell: () => Amount,
+        enableSorting: false,
+        size: (100 / 24) * 2,
+      },
+      {
+        accessorKey: 'chevron',
+        header: '',
+        cell: isClickable ? () => ChevronRightCell : undefined,
+        enableSorting: false,
+        size: (100 / 24) * 2,
+      },
+    ];
+  }
   $: isMyBalances = userId === $wallet.beamsUserId;
-  // $: tableColumns = buildTableColumns(isMyBalances);
+  $: tableColumns = buildTableColumns(isMyBalances);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // let options: TableOptions<any>;
-  // $: options = {
-  //   data: tableData,
-  //   columns: tableColumns,
-  //   getCoreRowModel: getCoreRowModel(),
-  // };
+  let options: TableOptions<any>;
+  $: options = {
+    data: tableData,
+    columns: tableColumns,
+    getCoreRowModel: getCoreRowModel(),
+  };
 
   $: fetchStatus = userId ? $accountFetchStatussesStore[userId] : undefined;
 
@@ -199,7 +199,7 @@
       {error}
       empty={tableData.length === 0}
     >
-      <!-- <Table {options} isRowClickable={isMyBalances} on:rowClick={onRowClick} /> -->
+      <Table {options} isRowClickable={isMyBalances} on:rowClick={onRowClick} />
     </SectionSkeleton>
   </div>
 </div>

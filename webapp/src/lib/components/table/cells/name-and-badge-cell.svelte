@@ -17,7 +17,7 @@
 <script lang="ts">
   import StreamStateBadge from '$lib/components/stream-state-badge/stream-state-badge.svelte';
 
-  export let context: CellContext<unknown, unknown>;
+  // export let context: CellContext<unknown, unknown>;
 
   let props: NameAndBadgeCellProps;
 
@@ -32,7 +32,14 @@
       durationSeconds: z.number().optional(),
     });
 
-    props = propsSchema.parse(context.getValue());
+    props = propsSchema.parse(({
+      name: 'Beams created',
+      streamId: 'placeholder',
+      paused: false,
+      senderId: 'placeholder',
+      tokenAddress: 'placeholder',
+
+    }));
   }
 </script>
 
@@ -40,7 +47,7 @@
   <span class="typo-text-bold">
     {props.name}
   </span>
-  <StreamStateBadge {...props} hideActive size="small" />
+  <!-- <StreamStateBadge {...props} hideActive size="small" /> -->
 </div>
 
 <style>

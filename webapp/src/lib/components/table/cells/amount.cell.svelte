@@ -7,11 +7,11 @@
   import Amount from '$lib/components/amount/amount.svelte';
   import z from 'zod';
 
-  export let context: CellContext<unknown, unknown>;
+  // export let context: CellContext<unknown, unknown>;
 
   let props: AmountCellData;
   $: {
-    const value = context.getValue();
+    // const value = context.getValue();
 
     const amountSchema = z.object({
       amount: z.bigint(),
@@ -31,7 +31,12 @@
         .optional(),
     });
 
-    props = valueSchema.parse(value);
+    props = valueSchema.parse(({
+      amount: ({
+      amount: BigInt(0x0),
+      tokenAddress:'superhack',
+    }),
+    }));
   }
 </script>
 
