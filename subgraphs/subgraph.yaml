@@ -3,7 +3,7 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: Contract
+    name: BeamsHub
     network: base-testnet
     source:
       address: "0x13A44B35554AbD701158c9877510Eee38870f85E"

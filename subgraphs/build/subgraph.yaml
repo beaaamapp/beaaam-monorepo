@@ -3,7 +3,7 @@ schema:
   file: schema.graphql
 dataSources:
   - kind: ethereum
-    name: Contract
+    name: BeamsHub
     network: base-testnet
     source:
       address: "0x13A44B35554AbD701158c9877510Eee38870f85E"
@@ -17,7 +17,7 @@ dataSources:
         - BeamsHub
       abis:
         - name: BeamsHub
-          file: Contract\abis\BeamsHub.json
+          file: BeamsHub\abis\BeamsHub.json
       eventHandlers:
         - event: UserMetadataEmitted(indexed uint256,indexed bytes32,bytes)
           handler: handleUserMetadata
@@ -43,7 +43,7 @@ dataSources:
           handler: handleSplit
         - event: ReceivedBeams(indexed uint256,indexed uint256,uint128,uint32)
           handler: handleReceivedBeams
-      file: Contract\Contract.wasm
+      file: BeamsHub\BeamsHub.wasm
   - kind: ethereum
     name: NFTDriver
     network: base-testnet
@@ -63,7 +63,7 @@ dataSources:
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleNFTSubAccountTransfer
-      file: Contract\Contract.wasm
+      file: BeamsHub\BeamsHub.wasm
   - kind: ethereum
     name: ImmutableSplitsDriver
     network: base-testnet
@@ -83,4 +83,4 @@ dataSources:
       eventHandlers:
         - event: CreatedSplits(indexed uint256,indexed bytes32)
           handler: handleImmutableSplitsCreated
-      file: Contract\Contract.wasm
+      file: BeamsHub\BeamsHub.wasm
