@@ -205,13 +205,13 @@
     amountPerSecond={amountValidationState?.type === 'valid' ? amountPerSecond : undefined}
   /> -->
   <StepHeader
-    headline="Create stream"
-    description="Stream any ERC-20 token to anyone with an Ethereum address."
+    headline="Create Beaaam"
+    description="Beaaam any ERC-20 token to anyone with an Ethereum address."
   />
-  <FormField title="Stream name*">
+  <FormField title="Beaaam name*">
     <TextInput bind:value={streamNameValue} placeholder="Enter any name" />
   </FormField>
-  <FormField title="Stream to*">
+  <FormField title="Beaaam to*">
     <InputAddress
       bind:value={recipientAddressValue}
       on:validationChange={onAddressValidationChange}
@@ -223,12 +223,12 @@
         bind:selected={selectedTokenAddress}
         items={tokenList}
         searchable={Object.keys(tokenList).length > 5}
-        emptyStateText={'No tokens available to stream. Add one first by clicking "Add funds" on your Dashboard.'}
+        emptyStateText={'No tokens available to Beaaam. Add one first by clicking "Add funds" on your Dashboard.'}
       />
     </div>
   </FormField>
   <div class="form-row">
-    <FormField title="Stream rate*">
+    <FormField title="Beaaam rate*">
       <TextInput
         suffix={selectedToken?.info.symbol}
         bind:value={amountValue}
@@ -316,7 +316,7 @@
 
   <svelte:fragment slot="actions">
     <Button on:click={() => dispatch('conclude')}>Cancel</Button>
-    <Button variant="primary" on:click={submit} disabled={!formValid}>Create stream</Button>
+    <Button variant="primary" on:click={submit} disabled={!formValid}>Create Beaaam</Button>
   </svelte:fragment>
 </StepLayout>
 

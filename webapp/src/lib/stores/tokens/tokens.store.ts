@@ -108,6 +108,7 @@ export default (() => {
       const assetAddress = Utils.Asset.getAddressFromId(BigInt(beamsAssetId));
 
       const addressMatch = t.info.address.toLowerCase() === assetAddress.toLowerCase();
+      
       const chainIdMatch = t.info.chainId === chain;
 
       return addressMatch && chainIdMatch;
