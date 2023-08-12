@@ -1,0 +1,86 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: DripsHub
+    network: {{ network }}
+    source:
+      address: '{{dripsHub.address}}'
+      abi: DripsHub
+      startBlock: {{ dripsHub.block }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - DripsHub
+      abis:
+        - name: DripsHub
+          file: ./abis/DripsHub.json
+      eventHandlers:
+        - event: UserMetadataEmitted(indexed uint256,indexed bytes32,bytes)
+          handler: handleUserMetadata
+        - event: Collected(indexed uint256,indexed uint256,uint128)
+          handler: handleCollected
+        - event: DripsSet(indexed uint256,indexed uint256,indexed bytes32,bytes32,uint128,uint32)
+          handler: handleDripsSet
+        - event: DripsReceiverSeen(indexed bytes32,indexed uint256,uint256)
+          handler: handleDripsReceiverSeen
+        - event: SqueezedDrips(indexed uint256,indexed uint256,indexed uint256,uint128,bytes32[])
+          handler: handleSqueezedDrips
+        - event: SplitsSet(indexed uint256,indexed bytes32)
+          handler: handleSplitsSet
+        - event: SplitsReceiverSeen(indexed bytes32,indexed uint256,uint32)
+          handler: handleSplitsReceiverSeen
+        - event: Given(indexed uint256,indexed uint256,indexed uint256,uint128)
+          handler: handleGiven
+        - event: DriverRegistered(indexed uint32,indexed address)
+          handler: handleAppRegistered
+        - event: DriverAddressUpdated(indexed uint32,indexed address,indexed address)
+          handler: handleAppAddressUpdated
+        - event: Split(indexed uint256,indexed uint256,indexed uint256,uint128)
+          handler: handleSplit
+        - event: ReceivedDrips(indexed uint256,indexed uint256,uint128,uint32)
+          handler: handleReceivedDrips
+      file: ./src/mapping.ts
+  - kind: ethereum/contract
+    name: NFTDriver
+    network: {{ network }}
+    source:
+      address: '{{nftDriver.address}}'
+      abi: NFTDriver
+      startBlock: {{ nftDriver.block }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - NFTDriver
+      abis:
+        - name: NFTDriver
+          file: ./abis/NFTDriver.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleNFTSubAccountTransfer
+      file: ./src/mapping.ts
+  - kind: ethereum/contract
+    name: ImmutableSplitsDriver
+    network: {{ network }}
+    source:
+      address: '{{immutableSplitsDriver.address}}'
+      abi: ImmutableSplitsDriver
+      startBlock: {{ immutableSplitsDriver.block }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - ImmutableSplitsDriver
+      abis:
+        - name: ImmutableSplitsDriver
+          file: ./abis/ImmutableSplitsDriver.json
+      eventHandlers:
+        - event: CreatedSplits(indexed uint256,indexed bytes32)
+          handler: handleImmutableSplitsCreated
+      file: ./src/mapping.ts

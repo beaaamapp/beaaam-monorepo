@@ -1,0 +1,88 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: BeamsHub
+    network: optimism-goerli
+    source:
+      address: "0x00FA9D90FF061EF57214524FDf1744B5670dC214"
+      abi: BeamsHub
+      startBlock: 13176164
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - BeamsHub
+      abis:
+        - name: BeamsHub
+          file: ./abis/BeamsHub.json
+      eventHandlers:
+        - event: UserMetadataEmitted(indexed uint256,indexed bytes32,bytes)
+          handler: handleUserMetadata
+        - event: Collected(indexed uint256,indexed uint256,uint128)
+          handler: handleCollected
+        - event: BeamsSet(indexed uint256,indexed uint256,indexed bytes32,bytes32,uint128,uint32)
+          handler: handleBeamsSet
+        - event: BeamsReceiverSeen(indexed bytes32,indexed uint256,uint256)
+          handler: handleBeamsReceiverSeen
+        - event: SqueezedBeams(indexed uint256,indexed uint256,indexed uint256,uint128,bytes32[])
+          handler: handleSqueezedBeams
+        - event: SplitsSet(indexed uint256,indexed bytes32)
+          handler: handleSplitsSet
+        - event: SplitsReceiverSeen(indexed bytes32,indexed uint256,uint32)
+          handler: handleSplitsReceiverSeen
+        - event: Given(indexed uint256,indexed uint256,indexed uint256,uint128)
+          handler: handleGiven
+        - event: DriverRegistered(indexed uint32,indexed address)
+          handler: handleAppRegistered
+        - event: DriverAddressUpdated(indexed uint32,indexed address,indexed address)
+          handler: handleAppAddressUpdated
+        - event: Split(indexed uint256,indexed uint256,indexed uint256,uint128)
+          handler: handleSplit
+        - event: ReceivedBeams(indexed uint256,indexed uint256,uint128,uint32)
+          handler: handleReceivedBeams
+      file: ./src/mapping.ts
+  
+  - kind: ethereum
+    name: NFTDriver
+    network: optimism-goerli
+    source:
+      address: "0xb0BAF324630e79CD7351ADc81B40b60Ca70792b7"
+      abi: NFTDriver
+      startBlock: 13176164
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - NFTDriver
+      abis:
+        - name: NFTDriver
+          file: ./abis/NFTDriver.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleNFTSubAccountTransfer
+      file: ./src/mapping.ts
+  - kind: ethereum
+    name: ImmutableSplitsDriver
+    network: optimism-goerli
+    source:
+      address: "0xC3688797ebBe9f39E82Ee4A17CDec96d068A7b57"
+      abi: ImmutableSplitsDriver
+      startBlock: 13176164
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ImmutableSplitsDriver
+      abis:
+        - name: ImmutableSplitsDriver
+          file: ./abis/ImmutableSplitsDriver.json
+      eventHandlers:
+        - event: CreatedSplits(indexed uint256,indexed bytes32)
+          handler: handleImmutableSplitsCreated
+      file: ./src/mapping.ts
+ 

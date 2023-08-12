@@ -1,0 +1,16 @@
+{
+  "optimism-goerli": {
+    "beamsHub": {
+      "address": "0x00FA9D90FF061EF57214524FDf1744B5670dC214",
+      "startBlock": 13176164
+    },
+    "nftDriver": {
+      "address": "0xb0BAF324630e79CD7351ADc81B40b60Ca70792b7"
+    },
+    "immutableSplitsDriver": {
+      "address": "0xC3688797ebBe9f39E82Ee4A17CDec96d068A7b57"
+    }
+  }
+}
+
+
