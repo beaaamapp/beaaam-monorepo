@@ -7,7 +7,7 @@
   import Amount from '$lib/components/amount/amount.svelte';
   import z from 'zod';
 
-  // export let context: CellContext<unknown, unknown>;
+  export let context: CellContext<unknown, unknown>;
 
   let props: AmountCellData;
   $: {
@@ -31,15 +31,10 @@
         .optional(),
     });
 
-    props = valueSchema.parse(({
-      amount: ({
-      amount: BigInt(0x0),
-      tokenAddress:'superhack',
-    }),
-    }));
+    // props = valueSchema.parse(({value}));
   }
 </script>
 
 {#if props}
-  <Amount {...props} />
+  <!-- <Amount {...props} /> -->
 {/if}

@@ -204,7 +204,7 @@
     <div class="stream-page" in:fly={{ duration: 300, y: 16 }}>
       <div class="hero">
         <div class="title-and-state">
-          <h1>{stream.name ?? 'Unnamed Beaaaaaam'}</h1>
+          <h1>{stream.name ?? 'beams created'}</h1>
           <StreamStateBadge
             {streamId}
             paused={stream.paused}
@@ -214,8 +214,9 @@
             {tokenAddress}
           />
         </div>
+       
         
-        {#if checkIsUser(stream.sender.userId) && stream.managed}
+        <!-- {#if checkIsUser(stream.sender.userId) && stream.managed} -->
           <div class="actions">
             {#if stream && !stream.paused}<Button
                 icon={PauseIcon}
@@ -246,7 +247,7 @@
                 >Edit</Button
               >{/if}
           </div>
-        {/if}
+        
       </div>
       <!-- <StreamVisual
         fromAddress={stream.sender.address}

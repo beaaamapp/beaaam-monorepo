@@ -17,7 +17,7 @@
 <script lang="ts">
   import StreamStateBadge from '$lib/components/stream-state-badge/stream-state-badge.svelte';
 
-  // export let context: CellContext<unknown, unknown>;
+  export let context: CellContext<unknown, unknown>;
 
   let props: NameAndBadgeCellProps;
 

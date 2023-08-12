@@ -29,6 +29,10 @@
 
     props = propSchema.parse(({
       address: 'SuperHack',
+      overrideToDisplay: ({
+          name: 'Superhack',
+          symbol: 'super'
+        })
      
     }));
   }
