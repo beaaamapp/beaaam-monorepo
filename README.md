@@ -9,7 +9,7 @@
   <br>
 </h1>
 
-<h4 align="center">The Cutting-Edge Protocol for Seamless Token Beaaaming aka Streaming 😉</h4>
+<h4 align="center">The Cutting-Edge Protocol for Seamless Token Beaaaming</h4>
 
 <p align="center">
   <a href="#introduction">Introduction</a> •
