@@ -171,7 +171,33 @@ namespace Utils {
 				IMMUTABLE_SPLITS_DRIVER_ADMIN: "0x840C1b6ce85bBFEbcFAd737514c0097B078a7E7E",
 				IMMUTABLE_SPLITS_DRIVER_ID: "2",
 				SUBGRAPH_URL: 'https://api.studio.thegraph.com/query/50446/beam/v0.0.6'
-			}
+			}, 
+			80001 :{
+				CHAIN:                       "mumbai",
+				 DEPLOYMENT_TIME:              "22023-08-23T13:52:02+00:00",
+				 COMMIT_HASH:                  "04a422c4970cc132f8084635743b9d39861e4c3d",
+				 WALLET:                       "0x840C1b6ce85bBFEbcFAd737514c0097B078a7E7E",
+				 WALLET_NONCE:                 "182",
+				 DEPLOYER:                     "0x180F7463dBD2Cce1Cfb87E7f4b07a39bBD80903e",
+				 BEAMS_HUB:                     "0x6234eF8D245AE73E19E5ef0a5A15bF5d61B64ce9",
+				 BEAMS_HUB_CYCLE_SECONDS:       "604800",
+				 BEAMS_HUB_LOGIC:               "0xf26E945F1E3372007F8DF9ddC0f3beE2e01ef7a8",
+				 BEAMS_HUB_ADMIN:               "0x840C1b6ce85bBFEbcFAd737514c0097B078a7E7E",
+				 CALLER:                       "0xee2395aB0256dDbDD7222917E1c02e6D9F0ed859",
+				 ADDRESS_DRIVER:                "0x306A51d1d08D118986241CC15B4BA22b2a8EF921",
+				 ADDRESS_DRIVER_LOGIC:          "0xd987192aE22cCad96a8c4bf225f169A3c3159930",
+				 ADDRESS_DRIVER_ADMIN:          "0x840C1b6ce85bBFEbcFAd737514c0097B078a7E7E",
+				 ADDRESS_DRIVER_ID:             "0",
+				 NFT_DRIVER:                    "0x33afAA9483c8BB6903c152050cf32DeF6C5eCaFe",
+				 NFT_DRIVER_LOGIC:              "0x28c6120825CAd2766670c3048D5E3944c0fdBcF1",
+				 NFT_DRIVER_ADMIN:              "0x840C1b6ce85bBFEbcFAd737514c0097B078a7E7E",
+				 NFT_DRIVER_ID:                 "1",
+				 IMMUTABLE_SPLITS_DRIVER:        "0x4F54b5F75732b82e3551Ade8A8471e7e6c64565b",
+				 IMMUTABLE_SPLITS_DRIVER_LOGIC:  "0xF82c902F791445901598788e934E3B8189B5FC10",
+				 IMMUTABLE_SPLITS_DRIVER_ADMIN:  "0x840C1b6ce85bBFEbcFAd737514c0097B078a7E7E",
+				 IMMUTABLE_SPLITS_DRIVER_ID:     "2",
+				 SUBGRAPH_URL: 'https://api.studio.thegraph.com/query/50446/beaaam-mumbai/v0.0.6'
+			 },
 		};
 
 		export const SUPPORTED_CHAINS: readonly number[] = Object.freeze(

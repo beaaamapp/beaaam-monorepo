@@ -1,0 +1,14 @@
+{
+  "mumbai": {
+    "beamsHub": {
+      "address": "0x6234eF8D245AE73E19E5ef0a5A15bF5d61B64ce9",
+      "startBlock": 39430631
+    },
+    "nftDriver": {
+      "address": "0x33afAA9483c8BB6903c152050cf32DeF6C5eCaFe"
+    },
+    "immutableSplitsDriver": {
+      "address": "0x4F54b5F75732b82e3551Ade8A8471e7e6c64565b"
+    }
+  }
+}
