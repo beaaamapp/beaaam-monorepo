@@ -1,7 +1,5 @@
 
 smart-contracts/lib/forge-std/
-./subgraphs-op/
-./subgraphs/
 
-subgraphs-op/
-subgraphs/
+subgraphs
+subgraphs-op

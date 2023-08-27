@@ -6,6 +6,10 @@
     onMount(() => {
 
     });
+
+    const d = new Date();
+	let year = d.getFullYear();
+
   </script>
   
   <svelte:head>
@@ -17,27 +21,56 @@
   </svelte:head>
   
   <LpHeader />
+
   <div id="lp">
     <div id="wrapper">
       <section id="hero">
         <img width="512" height="512" src={Beaaam} alt="beaaam logo" />
         <div id="title">
           <h1>Beaaaaaaam</h1>
+          <div >
+            <k3>Beams is a protocol for any EVM-based blockchain that allows users to set up and manage continuous transfers of funds from one account to another over time.</k3>
+          </div> <div >
+            <k3> We refer to such transfers as </k3> <k5>"Beaaams".</k5>
+
+          </div>
         </div>
       
       </section>
-      <section id="main-features">
-       
-        
-      </section>
-      <section>
-        <section />
+      <div class='body'> 
+
       
-      </section>
-     
-      
-      
+    
+        <section2 id="details">
+    
+          <h2 >Features</h2>
+    
+          <ul>
+            <li><k2 >Native ERC20 Beaaaming:</k2> Beam facilitates the beaaaming of any ERC20 token without the need for wrapping, eliminating additional contracts and trust-related assumptions.</li>
+            <li><k2>Gas Efficiency for Scaling:</k2> Beam is optimized for both one-to-one and many-to-one beaaaming scenarios, targeting real-world scales on the Ethereum mainnet while maintaining gas efficiency.
+            </li>
+            <li><k2>Scheduled beaaams:</k2> Users and developers can schedule streams to start and end at specific future times, enhancing precision in fund beaaaming management.</li>
+            <li><k2>Shared Beaamings Balances:</k2>  Unlike other protocols, Beams allows users to fund and top-up multiple beaaamings using a single balance and transaction, reducing the number of transactions and associated gas costs.</li>
+          </ul>
+    
+        </section2>
+    
+        <section id="details">
+    
+          <h2>Usage</h2>
+    
+          <p>the possibilities are endless. Users can effortlessly beaaam tokens to any  address, ensuring a smooth and continuous flow of funds. Whether it's distributing earnings to contributors, setting up vesting schedules, or offering subscription-based services, Ktrh's dynamic features cater to diverse business models.</p>
+    
+        </section>
+    
+    
+      </div>
     </div>
+
+    <footer id="hero">
+      <div class='copyright'>Beaaam &copy; {year}</div>
+    </footer>
+
   </div>
   
   <style>
@@ -86,13 +119,33 @@
       font-size: var(--font-size-xl);
       font-family: var(--font-serif);
       color: var(--color-primary);
+      line-height: 2.5rem;
     }
   
     h2 {
       font-size: var(--font-size-l);
       font-family: var(--font-serif);
+      color: var(--color-caution-level-2);
       line-height: 2.5rem;
     }
+
+    k2 {
+      color: var(--color-negative-level-2);
+     
+    }
+
+    k5 {
+      color: var(--color-primary);
+     
+    }
+
+    k3 {
+     
+      font-family: var(--font-serif);
+      line-height: 2.5rem;
+    }
+
+    
   
     h3 {
       font-size: var(--font-size-m);
@@ -102,6 +155,10 @@
     section {
       position: relative;
     }
+
+    section2 {
+	  margin-bottom: 64px;
+	}
   
     .centered {
       text-align: center;
@@ -166,6 +223,15 @@
         font-size: var(--font-size-m);
         line-height: 1.5rem;
       }
+
+      footer {
+	  border-top: 1px solid #555;
+	  padding: 24px 0;
+	}
+
+  .copyright {
+	  color: #888;
+	}
   
      
   
@@ -195,4 +261,5 @@
       }
     }
   </style>
+  
   

@@ -24,9 +24,9 @@
           <div class="network-badge">
             <p>Optimisim Goerli</p>
           </div>
-          {:else if $wallet.network.chainId == 919 }
+          {:else if $wallet.network.chainId == 80001 }
           <div class="network-badge">
-            <p>Mode Sepolia</p>
+            <p>Mumbai</p>
           </div>
           {:else if $wallet.network.chainId == 999 }
           <div class="network-badge">

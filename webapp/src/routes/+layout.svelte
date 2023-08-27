@@ -40,7 +40,7 @@
     min-width: 100vw;
     background-color: var(--color-background);
     color: var(--color-foreground);
-    overflow: hidden;
+    overflow: auto;
     transition: background-color 0.5s;
   }
 </style>

@@ -1,4 +1,4 @@
-<h5 class="beta-notice">SuperHack</h5>
+<h5 class="beta-notice">Beaaam-polygon</h5>
 
 <style>
   .beta-notice {
